@@ -3,6 +3,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class ProductsService {
@@ -48,9 +49,14 @@ export class ProductsService {
       }
    }
 
-   async findAll() {
+   async findAll( pagination: PaginationDto ) {
       try {
-         return await this.productR.find({})
+         const { page = 1, size = 10 } = pagination
+
+         return await this.productR.find({
+            take: size,
+            skip: page,
+         })
       } catch (error) {
          this.handleExceptions(error);
       }
