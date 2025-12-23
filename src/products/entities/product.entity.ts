@@ -34,6 +34,12 @@ export class Product {
 
    @Column('text', {
       array: true,
+      default: []
+   })
+   tags: string[];
+
+   @Column('text', {
+      array: true,
    })
    sizes: string[]
 

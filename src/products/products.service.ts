@@ -81,14 +81,14 @@ export class ProductsService {
          if (!product) {
             throw new NotFoundException(`Product with id: ${ id } not found`);
          }
-         
+
          return await this.productR.save( product );
       } catch (error) {
          this.handleExceptions( error );
       }
    }
 
-   handleExceptions(error: any) {
+   private handleExceptions(error: any) {
       if (error.code === '23505') {
          throw new BadRequestException(error.detail);
       }
