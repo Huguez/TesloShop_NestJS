@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, ParseUUIDPipe, Delete } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 
@@ -12,5 +12,20 @@ export class ProductsController {
    @Post()
    create(@Body() createProductDto: CreateProductDto) {
       return this.productsService.create(createProductDto);
+   }
+
+   @Get(":id")
+   getById( @Param( "id", ParseUUIDPipe ) id: string ){
+      return this.productsService.findOne( id );
+   }
+
+   @Get()
+   getAll(){
+      return this.productsService.findAll();
+   }
+
+   @Delete(":id")
+   async deleteOne( @Param( "id", ParseUUIDPipe ) id: string  ){
+      return this.productsService.remove( id );
    }
 }
