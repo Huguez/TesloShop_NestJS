@@ -1,24 +1,25 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProductsModule } from './products/products.module';
 
 @Module({
    imports: [
       ConfigModule.forRoot(),
       TypeOrmModule.forRoot({
          type: 'postgres',
-         host: 'localhost',
-         port: 5432,
-         database: 'Teslodb',
-         username: 'postgres',
-         password: 'admin123',
+         host: process.env.DB_HOST,
+         port: Number(process.env.DB_PORT),
+         database: process.env.DB_NAME,
+         username: process.env.DB_USER,
+         password: process.env.DB_PASSWORD,
          autoLoadEntities: true,
          synchronize: true,
-      })
+      }),
+      ProductsModule,
    ],
    controllers: [],
    providers: [],
    exports: []
 })
 export class AppModule { }
-console.log( process.env.DB_USER );
