@@ -132,7 +132,7 @@ export class ProductsService {
       }
    }
 
-   private handleExceptions(error: any) {
+   handleExceptions(error: any) {
       if (error.code === '23505') {
          throw new BadRequestException(error.detail);
       }
@@ -143,6 +143,16 @@ export class ProductsService {
       
       this.logger.error(error)
       throw new InternalServerErrorException("Unexpected Error, check logs");
+   }
+
+   async deleteAllProducts(){
+      const query = this.productR.createQueryBuilder('product');
+      
+      try {
+         return await query.delete().where({}).execute();
+      } catch (error) {
+         this.handleExceptions( error );
+      }
    }
 
 }
