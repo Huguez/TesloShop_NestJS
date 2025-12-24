@@ -4,6 +4,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
+
 @Controller('product')
 export class ProductsController {
 

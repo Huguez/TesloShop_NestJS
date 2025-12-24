@@ -22,6 +22,8 @@ DB_PORT     = ************
 DB_NAME     = ************
 DB_USER     = ************
 DB_PASSWORD = ************
+PORT        = ************
+HOST_API    = ************
 ```
 
 4.- Set up the database with Docker
