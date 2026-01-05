@@ -17,13 +17,14 @@ npm install
 
 3.- rename .env.template to .env and write variables
 ```
-DB_HOST     = ************
-DB_PORT     = ************
-DB_NAME     = ************
-DB_USER     = ************
-DB_PASSWORD = ************
-PORT        = ************
-HOST_API    = ************
+DB_HOST        = ************
+DB_PORT        = ************
+DB_NAME        = ************
+DB_USER        = ************
+DB_PASSWORD    = ************
+PORT           = ************
+SECRET_KEY_JWT = ************
+HOST_API       = ************
 ```
 
 4.- Set up the database with Docker
