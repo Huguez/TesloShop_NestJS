@@ -4,24 +4,28 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
+import { ValidRoles } from 'src/auth/interfaces/valid-roles.interface';
+import { GetUser } from 'src/auth/decorators/get-user.decorator';
+import { User } from 'src/auth/entities/user.entity';
 
 
 @Controller('product')
 @Auth()
 export class ProductsController {
-
+   
    constructor(
       private readonly productsService: ProductsService
    ) { }
-
+   
    @Post()
-   async create(@Body() createProductDto: CreateProductDto) {
-      return await this.productsService.create(createProductDto);
+   @Auth( ValidRoles.admin )
+   async create(@Body() createProductDto: CreateProductDto, @GetUser() user: User ) {
+      return await this.productsService.create(createProductDto, user);
    }
 
    @Put(":id" )
-   async update( @Param( "id", ParseUUIDPipe ) id: string, @Body() updateProductDto: UpdateProductDto ){
-      return await this.productsService.update( id, updateProductDto )
+   async update( @Param( "id", ParseUUIDPipe ) id: string, @Body() updateProductDto: UpdateProductDto, @GetUser() user: User ){
+      return await this.productsService.update( id, updateProductDto, user )
    }
 
    @Get(":term")
