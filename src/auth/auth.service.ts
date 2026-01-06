@@ -12,27 +12,27 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
 
    private readonly logger = new Logger("AuthService");
-   
+
    constructor(
       @InjectRepository(User)
       private readonly userR: Repository<User>,
       private readonly jwtService: JwtService
    ) { }
 
-   async login( loginUserDto: LoginUserDto ) {
+   async login(loginUserDto: LoginUserDto) {
       try {
-         const { email, password }  = loginUserDto
+         const { email, password } = loginUserDto
 
          const user = await this.userR.findOne({
             where: { email, isActivated: true },
             select: { password: true, username: true, email: true, roles: true }
          })
-         
+
          if (!user) {
-            throw new UnauthorizedException(`e-mail ${ email } isn't register.`);
+            throw new UnauthorizedException(`e-mail ${email} isn't register.`);
          }
-         
-         if ( !compareSync( password, user.password ) ) {
+
+         if (!compareSync(password, user.password)) {
             throw new UnauthorizedException(`Invalid credentials`);
          }
 
@@ -42,7 +42,7 @@ export class AuthService {
          };
 
       } catch (error) {
-         this.handleException( error )
+         this.handleException(error)
       }
    }
 
@@ -50,41 +50,54 @@ export class AuthService {
       try {
          const { password, ...userData } = createAuthDto
 
-         const userExist = await this.userR.findOneBy({email: userData.email})
+         const userExist = await this.userR.findOneBy({ email: userData.email })
 
          if (userExist) {
-            throw new BadRequestException(`e-mail ${ userData.email } is already registered`);
+            throw new BadRequestException(`e-mail ${userData.email} is already registered`);
          }
 
-         const newUser = await this.userR.create( {
-            ...userData, 
-            password: hashSync( password, 2 )
-         } )
-         
+         const newUser = await this.userR.create({
+            ...userData,
+            password: hashSync(password, 2)
+         })
+
          return {
-            user: await this.userR.save( newUser ),
+            user: await this.userR.save(newUser),
             token: this.generateJWT({ email: newUser.email }),
-         } 
+         }
       } catch (error) {
-         this.handleException( error )
+         this.handleException(error)
       }
    }
-   
+
+   async checkStatus(user: User) {
+      try {
+
+         return {
+            user,
+            token: this.generateJWT({ email: user.email }),
+         }
+      } catch (error) {
+         this.handleException(error)
+      }
+
+   }
+
    private handleException(error: any): never {
-      
-      if ( error.code === '23505' || error.status === 400 ) {
-         throw new BadRequestException( error.detail ?? error.message )
+
+      if (error.code === '23505' || error.status === 400) {
+         throw new BadRequestException(error.detail ?? error.message)
       }
 
-      if ( error.status === 401 ) {
-         throw new UnauthorizedException( error.message )
+      if (error.status === 401) {
+         throw new UnauthorizedException(error.message)
       }
 
-      this.logger.error( error );
-      throw new InternalServerErrorException( "unexpected error, check logs" )
+      this.logger.error(error);
+      throw new InternalServerErrorException("unexpected error, check logs")
    }
 
-   private generateJWT( payload: JwtPayload ){
-      return this.jwtService.sign( { ...payload } )
+   private generateJWT(payload: JwtPayload) {
+      return this.jwtService.sign({ ...payload })
    }
 }

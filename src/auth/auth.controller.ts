@@ -26,6 +26,12 @@ export class AuthController {
       return this.authService.sigIn(createAuthDto);
    }
 
+   @Get('check-status')
+   @Auth()
+   checkStatus( @GetUser() user: User  ){
+      return this.authService.checkStatus( user )
+   }
+
    @Get('private')
    @UseGuards(AuthGuard())
    privater(@GetUser() user: User, @RawHeaders() headers: string[]) {
