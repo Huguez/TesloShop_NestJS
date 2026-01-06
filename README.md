@@ -32,12 +32,12 @@ HOST_API       = ************
 docker-compose up -d
 ```
 
-6.- Run the service in development
+5.- Run the service in development
 ```
 npm run dev
 ```
 
-7.- Execute Seed
+6.- Execute Seed
 ```
 GET http://localhost:3000/api/seed
 ```

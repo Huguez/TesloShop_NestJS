@@ -7,7 +7,6 @@ import { Repository } from "typeorm";
 import { ConfigService } from "@nestjs/config";
 import { Injectable } from "@nestjs/common";
 
-
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 
@@ -21,19 +20,19 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
          jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       });
    }
-
+   
    async validate( { email }: JwtPayload ): Promise<User> {
       
       const user = await this.userR.findOneBy({ email })
-
+      
       if ( !user ) {
          throw new Error("Validate Error - user not found");
       }
-
+      
       if ( !user.isActivated ) {
          throw new Error("Validate Error - user not Active");
       }
-
+      
       return user;
    }
 }
