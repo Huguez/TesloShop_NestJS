@@ -1,0 +1,445 @@
+{
+	"info": {
+		"_postman_id": "e55b2661-340e-46a9-b662-ff3bccac4a14",
+		"name": "TesloShop_NestJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41337201"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"wawaPrime 3\",\r\n    \"price\": 75,\r\n    \"description\": \"Introducing the Tesla Chill Collection. The Men’s Chill Crew Neck Sweatshirt has a premium, heavyweight exterior and soft fleece interior for comfort in any season. The sweatshirt features a subtle thermoplastic polyurethane T logo on the chest and a Tesla wordmark below the back collar. Made from 60% cotton and 40% recycled polyester.\",\r\n    \"stock\": 7,\r\n    \"sizes\": [\"XS\", \"S\", \"M\", \"L\", \"XL\", \"XXL\"],\r\n    \"gender\": \"men\",\r\n    \"images\": [\r\n        \"https://cdn.shopify.com/s/files/1/0593/3210/0174/files/14_1_600x600.png?v=1757932586\",\r\n        \"https://cdn.shopify.com/s/files/1/0593/3210/0174/files/14_1_600x600.png?v=1757932586\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/product",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/wawa12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"wawa12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/99bedb43-7034-4ab9-9752-b66021ecba19",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"99bedb43-7034-4ab9-9752-b66021ecba19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 150.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/product/2ef73933-ec12-4b1c-9288-0623df2aa5e0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"2ef73933-ec12-4b1c-9288-0623df2aa5e0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "Upload File",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/cahuguez/Pictures/Screenshots/Screenshot 2025-12-19 112939.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/files/product",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"files",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/cahuguez/Pictures/Screenshots/Screenshot 2025-12-19 112939.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/files/product/82ee01b6-d8b1-465b-a853-c12abc698ded.png",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"files",
+								"product",
+								"82ee01b6-d8b1-465b-a853-c12abc698ded.png"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "sing in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"yailene\",\r\n    \"email\": \"yailene@wawa.com\",\r\n    \"password\": \"Wawa123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/signIn",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"save token in response\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    if( jsonData[\"token\"] ){\r",
+									"        var tokenValue = jsonData[\"token\"];\r",
+									"        pm.expect( tokenValue ).to.be.a('string'); // Check if the property is a string\r",
+									"        pm.environment.set( \"token\", tokenValue );\r",
+									"    } else {\r",
+									"        pm.expect.fail(\"'token' property is missing in the response body\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"Admin1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"Admin1234\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/check-status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"check-status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "private",
+			"item": [
+				{
+					"name": "private route 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/private",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"private"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "private route 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/private2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"private2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "private route 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/private3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"private3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "seed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/seed",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"seed"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
